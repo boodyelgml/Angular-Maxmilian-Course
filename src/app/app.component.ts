@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'courseProject';
+
+  defaultView = "recipe";
+
+  viewSelected(view:string){
+    this.defaultView = view;
+  }
+
+  directToShoppingList(shoppingListView){
+    this.defaultView = shoppingListView;
+  }
 }
