@@ -1,3 +1,4 @@
+import { recipe } from './recipe.model';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,6 +10,7 @@ export class RecipesComponent implements OnInit {
 
   constructor() { }
 
+  recipeWasSelected :recipe;
   @Output() shoppingListView = new EventEmitter<string>();
 
   PassToAppComponent(view){
