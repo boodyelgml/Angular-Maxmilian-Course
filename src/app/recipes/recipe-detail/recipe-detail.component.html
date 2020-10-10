@@ -5,9 +5,12 @@
     <h2>{{ Recipe.name }}</h2>
     <p>{{ Recipe.description }}</p>
     <span>ingredients</span>
+    <ul>
+      <li *ngFor="let ingredient of Recipe.ingredients">{{ ingredient.name }} - {{ ingredient.amount }}</li>
+    </ul>
     <br>
     <br>
-    <a class="btn btn-dark mx-1"  (click)="toShoppingList('shopping-list')" >To shopping list</a>
+    <a class="btn btn-dark mx-1"  (click)="toShoppingList()" >To shopping list</a>
     <a class="btn btn-primary mx-1" href="#">Edit</a>
     <a class="btn btn-danger mx-1" href="#">Delete</a>
 
