@@ -1,11 +1,8 @@
 <div class="row">
-  <div class="col-7">
+  <div class="col-md-7">
     <app-recipe-list (recipeSelected)="recipeWasSelected = $event"></app-recipe-list>
   </div>
-  <div class="col-5">
-    <app-recipe-detail *ngIf="recipeWasSelected else placeholderText" (directToShoppingList)="PassToAppComponent($event)" [Recipe]="recipeWasSelected"></app-recipe-detail>
-    <ng-template #placeholderText>
-      please select recipe to view details
-    </ng-template>
+  <div class="col-md-5">
+    <router-outlet></router-outlet>
   </div>
 </div>

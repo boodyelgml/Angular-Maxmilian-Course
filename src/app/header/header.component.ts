@@ -12,9 +12,4 @@ export class HeaderComponent implements OnInit {
    ngOnInit(): void {
   }
 
-   @Output() defaulView = new EventEmitter<string>();
-
-  switchViews(view:string){
-    this.defaulView.emit(view);
-  }
 }

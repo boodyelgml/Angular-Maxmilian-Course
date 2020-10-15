@@ -6,24 +6,21 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css'],
-  providers:[recipeService]
+  providers: [recipeService]
 })
 export class RecipesComponent implements OnInit {
 
-  constructor(private RecipeService:recipeService) { }
+  constructor( ) { }
 
-  recipeWasSelected :recipe;
+  recipeWasSelected: recipe;
   @Output() shoppingListView = new EventEmitter<string>();
 
-  PassToAppComponent(view){
+  PassToAppComponent(view) {
     this.shoppingListView.emit(view);
   }
 
   ngOnInit(): void {
-    this.RecipeService.onItemClickViewDetails.subscribe(
-      (recipe:recipe)=>
-      this.recipeWasSelected = recipe
-    )
+
   }
 
 }

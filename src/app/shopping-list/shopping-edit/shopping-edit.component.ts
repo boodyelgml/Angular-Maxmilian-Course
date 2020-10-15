@@ -5,8 +5,7 @@ import { shoppingServices } from '../shopping.services';
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css']
-})
+ })
 export class ShoppingEditComponent implements OnInit {
 
   @ViewChild('itemName') itemNameRef: ElementRef;

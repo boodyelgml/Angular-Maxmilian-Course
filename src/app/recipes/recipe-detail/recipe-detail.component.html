@@ -1,20 +1,21 @@
-
-<div class="row">
-  <div class="col-12 my-5">
-    <img [src]="Recipe.url" alt="" height="250px">
-    <h2>{{ Recipe.name }}</h2>
-    <p>{{ Recipe.description }}</p>
+<div class="row p-2" style="border: 1px solid #f1f1f1; margin-top: 70px;">
+  <div class=" col-12 p-3 mb-3 bg-primary text-white">{{ Recipe.name }} Details</div>
+  <div class="col-6 ">
+    <h4>{{ Recipe.name }}</h4>
+    <p class="text-success">{{ Recipe.description }}</p>
     <span>ingredients</span>
     <ul>
       <li *ngFor="let ingredient of Recipe.ingredients">{{ ingredient.name }} - {{ ingredient.amount }}</li>
     </ul>
-    <br>
-    <br>
-    <a class="btn btn-dark mx-1"  (click)="toShoppingList()" >To shopping list</a>
-    <a class="btn btn-primary mx-1" href="#">Edit</a>
-    <a class="btn btn-danger mx-1" href="#">Delete</a>
 
   </div>
 
-
+  <div class="col-6">
+    <img [src]="Recipe.url" alt="" class="img-fluid">
   </div>
+
+      <a class="btn btn-dark mx-1" (click)="toShoppingList()">To shopping list</a>
+      <a class="btn btn-primary mx-1" href="#">Edit</a>
+      <a class="btn btn-danger mx-1" href="#">Delete</a>
+
+</div>
