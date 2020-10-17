@@ -1,6 +1,6 @@
 import { recipeService } from './recipe.services';
 import { recipe } from './recipe.model';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-recipes',
@@ -10,17 +10,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class RecipesComponent implements OnInit {
 
-  constructor( ) { }
+  constructor() { }
 
-  recipeWasSelected: recipe;
-  @Output() shoppingListView = new EventEmitter<string>();
-
-  PassToAppComponent(view) {
-    this.shoppingListView.emit(view);
-  }
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
 }
