@@ -1,6 +1,6 @@
 <div class="row mt-5">
     <div class="col-md-12">
-        <form [formGroup]='recipeForm'   (submit)="onSubmit()">
+        <form [formGroup]='recipeForm' (submit)="onSubmit()">
             <button type="submit" class="btn btn-primary" [disabled]="recipeForm.invalid">Save</button>
             <button type="button" class="btn btn-danger mx-1">Cancel</button>
             <hr>
@@ -18,8 +18,7 @@
             </div>
             <div class="form-group " formArrayName="ingredients">
                 <label for="exampleInputPassword1">Ingredients</label>
-                <div class="row mt-2"
-                    *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index"
+                <div class="row mt-2" *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index"
                     [formGroupName]="i">
                     <div class="col-md-8">
                         <input type="text" class="form-control" formControlName="name">
