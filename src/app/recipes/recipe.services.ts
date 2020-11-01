@@ -10,23 +10,22 @@ export class recipeService {
 
   constructor(private shoppingServices: shoppingServices) { }
 
-  private recipes: recipe[] = [
-    new recipe('Spagetti', 'spagetti is a famous egyptian recipe which every newly married peoples eats everyday', 'https://image.shutterstock.com/image-photo/fresh-delicious-spagetti-bolognese-260nw-1170034021.jpg', [
-      new ingredients('makarona', 1),
-      new ingredients('tomatto salsa', 5)
-    ]),
-    new recipe('Mahshi', 'mahshi is the most famous recipe ever at egypt', 'https://www.justfood.tv/nawa3emPics/000%20(7)-8.jpg',
-      [
-        new ingredients('Rise', 5),
-        new ingredients('wara2 3enab', 5)
-      ])
-  ];
+  private recipes: recipe[] = [];
 
+ 
+  setRecipes(recipe:recipe[]){
+    this.recipes = recipe;   
+    this.recipeChanged.next(this.recipes.slice());
+  }
+  
   addRecipe(recipe: recipe) {
     this.recipes.push(recipe);
     this.recipeChanged.next(this.recipes.slice());
   }
-
+  deleteRecipe(index:number){
+    this.recipes.splice(index,1);
+    this.recipeChanged.next(this.recipes.slice()); 
+  }
   updateRecipe(index: number, newRecipe: recipe) {
     console.log(this.recipes[index]);
     this.recipes[index] = newRecipe;

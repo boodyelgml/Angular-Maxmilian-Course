@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <form [formGroup]='recipeForm' (submit)="onSubmit()">
             <button type="submit" class="btn btn-primary" [disabled]="recipeForm.invalid">Save</button>
-            <button type="button" class="btn btn-danger mx-1">Cancel</button>
+            <button type="button" class="btn btn-danger mx-1" (click)="onCancel()">Cancel</button>
             <hr>
             <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
@@ -10,16 +10,16 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Image url</label>
-                <input type="text" class="form-control" formControlName="url">
+                <input type="text" class="form-control" formControlName="url" #imagePath>
             </div>
+            <img [src]="imagePath.value" alt="" height="100px">
             <div class="form-group">
                 <label for="exampleInputPassword1">Description</label>
                 <textarea class="form-control" formControlName="description"></textarea>
             </div>
             <div class="form-group " formArrayName="ingredients">
                 <label for="exampleInputPassword1">Ingredients</label>
-                <div class="row mt-2" *ngFor="let ingredient of recipeForm.get('ingredients').controls; let i = index"
-                    [formGroupName]="i">
+                <div class="row mt-2" *ngFor="let ingredient of recipeForm.get('ingredients')['controls']; let i = index" [formGroupName]="i">
                     <div class="col-md-8">
                         <input type="text" class="form-control" formControlName="name">
                     </div>
@@ -33,7 +33,6 @@
                 <hr>
                 <button type="button" class="btn btn-primary" (click)="onAddIngredient()">Add ingredient</button>
             </div>
-
         </form>
     </div>
 </div>
