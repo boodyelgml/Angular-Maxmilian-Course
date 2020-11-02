@@ -18,6 +18,8 @@ import { shoppingServices } from './shopping-list/shopping.services';
 import { StartRecipeComponent } from './recipes/start-recipe/start-recipe.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RecipeListComponent,
     RecipeItemComponent,
     StartRecipeComponent,
-    EditRecipeComponent
+    EditRecipeComponent,
+    AuthComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

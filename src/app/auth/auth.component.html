@@ -1,0 +1,21 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<br>
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <div class="row">
+        <div class="form-group col-6">
+            <div class="alert alert-danger" *ngIf="isError">{{ errorMessage }}</div>
+            <label for="name" class="font-weight-bold">E-mail</label>
+            <input type="text" id="name" placeholder="email" class="form-control" ngModel name="email" required email>
+            <br>
+            <label for="password" class="font-weight-bold">Password</label>
+            <input type="password" id="password" placeholder="password" class="form-control" ngModel name="password" required minlength="6">
+        </div>
+        <div class="col-12 ">
+            <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">{{ isLoginMode ? 'login' : 'sign up'}}</button> |
+            <button class="btn btn-danger" type="button" (click)="onSwitchMode()">
+                {{ isLoginMode ? 'switch to sign up' : 'switch to login'}}
+            </button>
+        </div>
+
+    </div>
+</form>
