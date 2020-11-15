@@ -7,26 +7,28 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy{
-  isAuth = false;
-  private subs: Subscription;
-
-  constructor(private dataStorageService: dataStorageService, private AuthService: AuthService) { }
-
-
-  ngOnInit(): void {
-    this.subs = this.AuthService.user.subscribe(user => {
-      this.isAuth = !!user;
-    })
+export class HeaderComponent implements OnInit , OnDestroy{
+   isAuth:boolean;
+  constructor(private dataStorageService: dataStorageService, private AuthService: AuthService) {}
+     subs = this.AuthService.isAuth.subscribe(isAuth => {
+      this.isAuth = isAuth;
+    });  
+  
+  ngOnInit(){
+    console.log(this.isAuth)
   }
 
+  onlogout (){
+    this.isAuth = false;
+    this.AuthService.logout();
+  }
   saveData(){
     this.dataStorageService.storeRecipes();
   }
   fetchData(){
     this.dataStorageService.fetchRecipes().subscribe();
   }
-  ngOnDestroy() {
-    this.subs.unsubscribe();
-  }
+   ngOnDestroy(){
+     this.subs.unsubscribe()
+   }
 }

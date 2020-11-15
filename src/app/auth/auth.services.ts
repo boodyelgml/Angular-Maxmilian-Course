@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
+import { stringify } from 'querystring';
 
 
 
@@ -17,8 +19,12 @@ export interface responseAuthData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new Subject<User>();
+  token: string;
+  isAuth = new Subject<boolean>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) { }
+
+
 
   // sign up
   signUp(email: string, password: string, token: boolean) {
@@ -53,6 +59,9 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, id, idToken, expirationDate);
     this.user.next(user);
+    this.token = user.token;
+    localStorage.setItem('userLogedIn', JSON.stringify(user));
+    this.isAuth.next(true)
   }
 
   // handle errors
@@ -76,4 +85,48 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
+
+
+  logout() {
+    this.router.navigate(['/auth'])
+    this.user.next(null);
+    this.token = null;
+    localStorage.removeItem('userLogedIn');
+    this.isAuth.next(false)
+  }
+
+  autoLogin() {
+
+    const logedInUser:
+      {
+        email: string,
+        id: string,
+        _token: string,
+        _tokenExpirationDate: string
+      }
+      = JSON.parse(localStorage.getItem('userLogedIn'));
+
+    if (!logedInUser) {
+      console.log('failed to login');
+      this.isAuth.next(false)
+      this.router.navigate['/auth'];
+      return;
+    }
+
+    const LoadedUser = new User(
+      logedInUser.email
+      , logedInUser.id
+      , logedInUser._token
+      , new Date(logedInUser._tokenExpirationDate)
+    )
+    console.log(LoadedUser)
+
+    if (LoadedUser.token) {
+      this.user.next(LoadedUser);
+      this.isAuth.next(true);
+      this.token = LoadedUser.token;
+    }
+
+  }
+
 }

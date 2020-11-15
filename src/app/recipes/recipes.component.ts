@@ -10,10 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipesComponent implements OnInit {
 
-  constructor() {
+  constructor(private dataStorageService:dataStorageService) {
     
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.dataStorageService.fetchRecipes().subscribe();
+  }
 
 }

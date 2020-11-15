@@ -4,8 +4,7 @@ export class User {
   get token() {
     if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
       return null;
-    }  
-    localStorage['token'] = this._token;
-    return localStorage['token'];
+    }
+    return this._token;
   }
 }

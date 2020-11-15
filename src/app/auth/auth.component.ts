@@ -9,14 +9,16 @@ import { Router } from '@angular/router';
   templateUrl: './auth.component.html',
  })
 export class AuthComponent {
+  
 
   isLoginMode : boolean = true;
   isLoading : boolean = false;
   isError : boolean = false;
   errorMessage:string;
-
-  constructor(private AuthService: AuthService, private router: Router) { }
-
+  
+  constructor(private AuthService: AuthService, private router: Router) { 
+   }
+  
   
 
   onSwitchMode(){
@@ -26,6 +28,7 @@ export class AuthComponent {
   onSubmit(loginForm : NgForm){
     let authObservable : Observable<responseAuthData> ;  
     this.isLoading = true;
+
     const email = loginForm.value.email;
     const password = loginForm.value.password;
     
@@ -37,18 +40,15 @@ export class AuthComponent {
     }
 
     authObservable.subscribe(
-      (response) => {
-        localStorage['token'] = response.idToken;
-         this.isLoading = false;
+      (response) => { 
+         this.isLoading = false; 
         this.router.navigate(['/recipes']);
       } , 
       (errorMessage) =>{ 
         this.isError = true;
         this.errorMessage = errorMessage;
-        this.isLoading = false
-
-      }
-
+        this.isLoading = false 
+      } 
     )
   } 
 

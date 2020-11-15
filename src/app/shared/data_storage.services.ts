@@ -16,17 +16,14 @@ export class dataStorageService {
         const recipes = this.recipeService.getRecipes();
         return this.http.put('https://recipe-app-25c8b.firebaseio.com/recipes.json', recipes).subscribe(
             (res) => {
-                alert(res);
+                alert('Modified successfully');
             }
         )
     }
 
     fetchRecipes() {
         return this.http
-            .get<recipe[]>('https://recipe-app-25c8b.firebaseio.com/recipes.json', 
-            {
-                params:new HttpParams().set('auth',localStorage['token']),
-            })
+            .get<recipe[]>('https://recipe-app-25c8b.firebaseio.com/recipes.json' )
             .pipe(map(recipe => {
                 return recipe.map(recipe => {
                     return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] }

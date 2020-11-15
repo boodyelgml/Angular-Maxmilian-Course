@@ -1,10 +1,11 @@
+import { authInterceptorService } from './auth/auth-interceptor-services';
 import { recipeResolver } from './shared/recipe_resolver.services';
 import { dataStorageService } from './shared/data_storage.services';
 import { recipeService } from './recipes/recipe.services';
 import { appRouting } from './app.routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -43,7 +44,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [shoppingServices, recipeService , dataStorageService , recipeResolver],
+  providers: [shoppingServices, recipeService , dataStorageService , recipeResolver , {provide:HTTP_INTERCEPTORS , useClass:authInterceptorService , multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
