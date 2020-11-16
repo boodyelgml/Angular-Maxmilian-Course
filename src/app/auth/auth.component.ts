@@ -7,50 +7,49 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
- })
+})
 export class AuthComponent {
-  
 
-  isLoginMode : boolean = true;
-  isLoading : boolean = false;
-  isError : boolean = false;
-  errorMessage:string;
-  
-  constructor(private AuthService: AuthService, private router: Router) { 
-   }
-  
-  
 
-  onSwitchMode(){
-    this.isLoginMode = !this.isLoginMode; 
+  isLoginMode: boolean = true;
+  isLoading: boolean = false;
+  isError: boolean = false;
+  errorMessage: string;
+
+  constructor(private AuthService: AuthService, private router: Router) {}
+ 
+  // login & sign up Switcher
+  onSwitchMode() {
+    this.isLoginMode = !this.isLoginMode;
   }
+
   
-  onSubmit(loginForm : NgForm){
-    let authObservable : Observable<responseAuthData> ;  
+  onSubmit(loginForm: NgForm) {
+    let authObservable: Observable<responseAuthData>;
     this.isLoading = true;
 
     const email = loginForm.value.email;
     const password = loginForm.value.password;
-    
-    if(this.isLoginMode){
-     authObservable = this.AuthService.signIn(email,password,true);
-    }else{
-      authObservable = this.AuthService.signUp(email,password,true);
+
+    if (this.isLoginMode) {
+      authObservable = this.AuthService.logIn(email, password, true);
+    } else {
+      authObservable = this.AuthService.signUp(email, password, true);
       loginForm.reset();
     }
 
     authObservable.subscribe(
-      (response) => { 
-         this.isLoading = false; 
+      (response) => {
+        this.isLoading = false;
         this.router.navigate(['/recipes']);
-      } , 
-      (errorMessage) =>{ 
+      },
+      (errorMessage) => {
         this.isError = true;
         this.errorMessage = errorMessage;
-        this.isLoading = false 
-      } 
+        this.isLoading = false
+      }
     )
-  } 
+  }
 
 
 }
