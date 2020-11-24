@@ -8,9 +8,7 @@ import { recipeService } from './recipes/recipe.services';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{ 
-  /**
-   *
-   */
+  
   constructor(private AuthService:AuthService) {
   }
   ngOnInit(){ 

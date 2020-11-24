@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError, Subject } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject, BehaviorSubject } from 'rxjs';
+import { catchError, tap, map, take } from 'rxjs/operators';
 import { User } from './user.model';
 import { stringify } from 'querystring';
 
@@ -19,14 +19,12 @@ export interface responseAuthData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  
-  user = new Subject<User>();
-  token: string;
-  private tokenExpirationTimer:any;
-  isAuth = new Subject<boolean>();
+
+  user = new BehaviorSubject<User>(null);
+  private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) { }
- 
+
   // sign up
   signUp(email: string, password: string, token: boolean) {
     return this.http.post<responseAuthData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBEkELjj9Vf3yF46q36fWZXpZC_IvUrCCE',
@@ -38,7 +36,7 @@ export class AuthService {
     ).pipe(catchError(this.onAuthFail), tap(resData => {
       this.onAuthSuccess(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
     }))
-  } 
+  }
 
   // log in
   logIn(email: string, password: string, token: boolean) {
@@ -56,35 +54,32 @@ export class AuthService {
   //auto login
   autoLogin() {
 
-    const logedInUser:
-      {
-        email: string,
-        id: string,
-        _token: string,
-        _tokenExpirationDate: string
-      }
+    const logedInUser: { email: string, id: string, _token: string, _tokenExpirationDate: string }
       = JSON.parse(localStorage.getItem('userLogedIn'));
 
     if (!logedInUser) {
-       this.isAuth.next(false)
+
+
+      this.user.next(null);
+
       this.router.navigate['/auth'];
+
       return;
     }
 
-    const LoadedUser = new User(
-      logedInUser.email
-      , logedInUser.id
-      , logedInUser._token
-      , new Date(logedInUser._tokenExpirationDate)
-    )
- 
+    const LoadedUser = new User(logedInUser.email, logedInUser.id, logedInUser._token, new Date(logedInUser._tokenExpirationDate))
+
     if (LoadedUser.token) {
+
       this.user.next(LoadedUser);
-      this.isAuth.next(true);
+
       this.token = LoadedUser.token;
+
       const expirationTokenDate = new Date(logedInUser._tokenExpirationDate).getTime() - new Date().getTime();
+
       this.autoLogout(expirationTokenDate);
     }
+
 
   }
 
@@ -93,32 +88,35 @@ export class AuthService {
     localStorage.removeItem('userLogedIn');
     this.user.next(null);
     this.token = null;
-    this.isAuth.next(false)
     this.router.navigate(['/auth'])
 
-    if(this.tokenExpirationTimer){
+    if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer)
-    }else{
+    } else {
       this.tokenExpirationTimer = null;
     }
   }
 
-  autoLogout(expirationTokenDate :number){
+  autoLogout(expirationTokenDate: number) {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationTokenDate);
 
   }
- 
+
   // on Auth Success
   private onAuthSuccess(email: string, id: string, idToken: string, expiresIn: number) {
+
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+
     const user = new User(email, id, idToken, expirationDate);
+
     this.user.next(user);
-    this.token = user.token;
+
     this.autoLogout(expiresIn * 1000);
+
     localStorage.setItem('userLogedIn', JSON.stringify(user));
-    this.isAuth.next(true)
+
   }
 
   // on Auth Fail
@@ -144,6 +142,6 @@ export class AuthService {
   }
 
 
-  
+
 
 }
