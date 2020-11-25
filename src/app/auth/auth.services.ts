@@ -17,13 +17,15 @@ export interface responseAuthData {
   registered?: string;
 }
 @Injectable({ providedIn: 'root' })
+
 export class AuthService {
 
-
   user = new BehaviorSubject<User>(null);
+  token: string;
   private tokenExpirationTimer: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  // Constructor
+  constructor(private http: HttpClient, private router: Router) {}
 
   // sign up
   signUp(email: string, password: string, token: boolean) {
@@ -51,14 +53,13 @@ export class AuthService {
     }))
   }
 
-  //auto login
+  // auto login
   autoLogin() {
 
     const logedInUser: { email: string, id: string, _token: string, _tokenExpirationDate: string }
       = JSON.parse(localStorage.getItem('userLogedIn'));
 
     if (!logedInUser) {
-
 
       this.user.next(null);
 
@@ -97,6 +98,7 @@ export class AuthService {
     }
   }
 
+  // autoLogout
   autoLogout(expirationTokenDate: number) {
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
@@ -140,8 +142,5 @@ export class AuthService {
     }
     return throwError(errorMessage);
   }
-
-
-
 
 }

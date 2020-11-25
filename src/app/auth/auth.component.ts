@@ -16,14 +16,14 @@ export class AuthComponent {
   isError: boolean = false;
   errorMessage: string;
 
-  constructor(private AuthService: AuthService, private router: Router) {}
- 
+  constructor(private AuthService: AuthService, private router: Router) { }
+
   // login & sign up Switcher
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  
+
   onSubmit(loginForm: NgForm) {
     let authObservable: Observable<responseAuthData>;
     this.isLoading = true;

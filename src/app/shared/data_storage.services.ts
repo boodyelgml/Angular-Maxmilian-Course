@@ -1,7 +1,7 @@
 import { Params } from '@angular/router';
 import { AuthService } from './../auth/auth.services';
-import { recipe } from './../recipes/recipe.model';
-import { recipeService } from './../recipes/recipe.services';
+import { recipe } from './../recipes/services-models/recipe.model';
+import { recipeService } from './../recipes/services-models/recipe.services';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';

@@ -1,6 +1,7 @@
 import { Subject } from 'rxjs';
-import { shoppingServices } from './../shopping-list/shopping.services';
-import { ingredients } from './../shopping-list/ingredients.model';
+import { ingredients } from 'src/app/shopping-list/ingredients.model';
+import { shoppingServices } from 'src/app/shopping-list/shopping.services';
+
 import { EventEmitter, Injectable } from '@angular/core';
 import { recipe } from './recipe.model';
 @Injectable()

@@ -1,39 +1,28 @@
-import { authInterceptorService } from './auth/auth-interceptor-services';
-import { recipeResolver } from './shared/recipe_resolver.services';
-import { dataStorageService } from './shared/data_storage.services';
-import { recipeService } from './recipes/recipe.services';
-import { appRouting } from './app.routing.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { shoppingServices } from './shopping-list/shopping.services';
-import { StartRecipeComponent } from './recipes/start-recipe/start-recipe.component';
-import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { appRouting } from './app.routing.module';
+import { authInterceptorService } from './auth/auth-interceptor-services';
+
 import { AuthComponent } from './auth/auth.component';
+import { HeaderComponent } from './header/header.component';
+import { recipesModule } from './recipes/module-routing/recipes.module';
+ import { dataStorageService } from './shared/data_storage.services';
+import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { shoppingServices } from './shopping-list/shopping.services';
 import { SpinnerComponent } from './spinner/spinner.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RecipesComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    RecipeDetailComponent,
-    RecipeListComponent,
-    RecipeItemComponent,
-    StartRecipeComponent,
-    EditRecipeComponent,
     AuthComponent,
     SpinnerComponent
   ],
@@ -42,9 +31,10 @@ import { SpinnerComponent } from './spinner/spinner.component';
     appRouting,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    recipesModule
   ],
-  providers: [shoppingServices, recipeService , dataStorageService , recipeResolver , {provide:HTTP_INTERCEPTORS , useClass:authInterceptorService , multi:true}],
+  providers: [shoppingServices, dataStorageService, { provide: HTTP_INTERCEPTORS, useClass: authInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
