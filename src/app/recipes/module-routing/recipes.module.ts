@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
- import { ReactiveFormsModule, FormsModule } from '@angular/forms';
- import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { recipeRoutnigModule } from './recipe-routing.module';
 import { RecipesComponent } from '../recipes.component';
 import { RecipeDetailComponent } from '../recipe-detail/recipe-detail.component';
@@ -18,13 +18,13 @@ import { recipeResolver } from '../../shared/recipe_resolver.services';
     RecipesComponent,
     RecipeDetailComponent,
     RecipeListComponent,
-    RecipeItemComponent, 
+    RecipeItemComponent,
     StartRecipeComponent,
     EditRecipeComponent
   ],
-    providers: [recipeService, recipeResolver],
-    imports: [RouterModule, CommonModule, ReactiveFormsModule, FormsModule, recipeRoutnigModule],
-  exports: []
+  providers: [recipeService, recipeResolver],
+  imports: [RouterModule, CommonModule, ReactiveFormsModule, FormsModule, recipeRoutnigModule]
+
 })
 
-export class recipesModule {}
+export class recipesModule { }

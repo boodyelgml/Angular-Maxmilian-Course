@@ -9,11 +9,10 @@ import { authInterceptorService } from './auth/auth-interceptor-services';
 import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './header/header.component';
 import { recipesModule } from './recipes/module-routing/recipes.module';
- import { dataStorageService } from './shared/data_storage.services';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { shoppingServices } from './shopping-list/shopping.services';
+import { dataStorageService } from './shared/data_storage.services';
+import { shoppingServices } from './shopping-list/services-models/shopping.services';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { shoppingModule } from './shopping-list/module-routing/shopping.module';
 
 
 
@@ -21,8 +20,6 @@ import { SpinnerComponent } from './spinner/spinner.component';
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     AuthComponent,
     SpinnerComponent
   ],
@@ -32,7 +29,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    recipesModule
+    recipesModule,
+    shoppingModule
   ],
   providers: [shoppingServices, dataStorageService, { provide: HTTP_INTERCEPTORS, useClass: authInterceptorService, multi: true }],
   bootstrap: [AppComponent]

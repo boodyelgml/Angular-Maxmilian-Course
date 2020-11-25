@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
-import { ingredients } from './../ingredients.model';
+import { ingredients } from './../services-models/ingredients.model';
 import { Component, ElementRef, OnInit, Output, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
-import { shoppingServices } from '../shopping.services';
+import { shoppingServices } from '../services-models/shopping.services';
 import { NgForm } from '@angular/forms';
 
 @Component({
