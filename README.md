@@ -1,27 +1,46 @@
-# CourseProject
+# Angular — Maximilian Course
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
+A collection of Angular learning exercises and implementations created while following Maximilian Schwarzmüller's Angular course.
 
-## Development server
+## What This Repository Covers
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Angular application fundamentals
+- Components and templates
+- Data binding
+- Event handling
+- Services and dependency injection
+- Routing
+- Forms
+- HTTP/API integration
+- Reusable Angular patterns
 
-## Code scaffolding
+## Tech Stack
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular
+- TypeScript
+- HTML5
+- CSS
+- npm
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Install dependencies and start the development server:
 
-## Running unit tests
+```bash
+npm install
+ng serve
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Open `http://localhost:4200/` in your browser.
 
-## Running end-to-end tests
+## Purpose
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+This repository is a hands-on learning project for building a solid foundation in Angular and TypeScript.
 
-## Further help
+## Status
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Learning repository — examples and exercises may represent different stages of the course.
+
+## License
+
+No license has currently been specified for this repository.
